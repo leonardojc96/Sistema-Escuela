@@ -1,0 +1,17 @@
+C:\Users\Leonardo\source\repos\EscuelaForm\bin\Debug\EscuelaForm.exe.config
+C:\Users\Leonardo\source\repos\EscuelaForm\bin\Debug\EscuelaForm.exe
+C:\Users\Leonardo\source\repos\EscuelaForm\bin\Debug\EscuelaForm.pdb
+C:\Users\Leonardo\source\repos\EscuelaForm\bin\Debug\EntityFramework.dll
+C:\Users\Leonardo\source\repos\EscuelaForm\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Leonardo\source\repos\EscuelaForm\bin\Debug\EntityFramework.xml
+C:\Users\Leonardo\source\repos\EscuelaForm\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Leonardo\source\repos\EscuelaForm\obj\Debug\EscuelaForm.csprojAssemblyReference.cache
+C:\Users\Leonardo\source\repos\EscuelaForm\obj\Debug\EscuelaForm.Properties.Resources.resources
+C:\Users\Leonardo\source\repos\EscuelaForm\obj\Debug\EscuelaForm.csproj.GenerateResource.cache
+C:\Users\Leonardo\source\repos\EscuelaForm\obj\Debug\EscuelaForm.csproj.CopyComplete
+C:\Users\Leonardo\source\repos\EscuelaForm\obj\Debug\EscuelaForm.exe
+C:\Users\Leonardo\source\repos\EscuelaForm\obj\Debug\EscuelaForm.pdb
+C:\Users\Leonardo\source\repos\EscuelaForm\obj\Debug\EscuelaForm.Vistas.frmCrearGrupo.resources
+C:\Users\Leonardo\source\repos\EscuelaForm\obj\Debug\EscuelaForm.frmInicio.resources
+C:\Users\Leonardo\source\repos\EscuelaForm\obj\Debug\EscuelaForm.Vistas.frmModificar.resources
+C:\Users\Leonardo\source\repos\EscuelaForm\obj\Debug\EscuelaForm.Vistas.frmAulas.resources

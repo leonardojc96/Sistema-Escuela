@@ -1,0 +1,1067 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NuevaEscuelaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumnos">
+          <Key>
+            <PropertyRef Name="id_alumno" />
+          </Key>
+          <Property Name="id_alumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="primer_apellido" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="segundo_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="nombre_completo" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="profesion" Type="varbinary" MaxLength="50" />
+          <Property Name="telefono" Type="varchar" MaxLength="50" />
+          <Property Name="telefono_movil" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Alumnos_en_grupos">
+          <Key>
+            <PropertyRef Name="id_alumnoengrupo" />
+          </Key>
+          <Property Name="id_alumnoengrupo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_matricula" Type="int" Nullable="false" />
+          <Property Name="fecha_inicio" Type="date" Nullable="false" />
+          <Property Name="fecha_fin" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Asistencia">
+          <Key>
+            <PropertyRef Name="id_asistencia" />
+          </Key>
+          <Property Name="id_asistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_clase" Type="int" />
+          <Property Name="id_alumnoengrupo" Type="int" />
+          <Property Name="asiste" Type="bit" />
+          <Property Name="falta_justificada" Type="bit" />
+        </EntityType>
+        <EntityType Name="Aulas">
+          <Key>
+            <PropertyRef Name="id_aula" />
+          </Key>
+          <Property Name="id_aula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Aula" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Division" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clases">
+          <Key>
+            <PropertyRef Name="id_clase" />
+          </Key>
+          <Property Name="id_clase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_tipocancelacion" Type="int" Nullable="false" />
+          <Property Name="id_horario" Type="int" Nullable="false" />
+          <Property Name="id_tipotarea" Type="int" Nullable="false" />
+          <Property Name="id_profesor" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="hora_inicio" Type="time" Precision="7" />
+          <Property Name="hora_fin" Type="time" Precision="7" />
+          <Property Name="notas_pedagogicas" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Cursos">
+          <Key>
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_curso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="fecha_inicio" Type="date" />
+          <Property Name="fecha_fin" Type="date" />
+        </EntityType>
+        <EntityType Name="Grupos">
+          <Key>
+            <PropertyRef Name="id_grupo" />
+          </Key>
+          <Property Name="id_grupo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_profesor" Type="int" />
+          <Property Name="id_curso" Type="int" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+          <Property Name="codigo" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_inicio" Type="date" />
+          <Property Name="fecha_fin" Type="date" />
+          <Property Name="id_aula" Type="int" />
+          <Property Name="notas" Type="varchar(max)" />
+          <Property Name="horario" Type="varchar" MaxLength="100" />
+          <Property Name="maximo_alumnos" Type="int" />
+          <Property Name="numero_alumnos" Type="int" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="id_horario" />
+          </Key>
+          <Property Name="id_horario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_profesor" Type="int" Nullable="false" />
+          <Property Name="id_grupo" Type="int" Nullable="false" />
+          <Property Name="fecha_inicio" Type="date" />
+          <Property Name="fecha_fin" Type="date" />
+          <Property Name="L" Type="bit" />
+          <Property Name="M" Type="bit" />
+          <Property Name="X" Type="bit" />
+          <Property Name="J" Type="bit" />
+          <Property Name="V" Type="bit" />
+          <Property Name="hora_inicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="hora_fin" Type="time" Precision="7" Nullable="false" />
+          <Property Name="id_tipo_tarea" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Matriculas">
+          <Key>
+            <PropertyRef Name="id_matricula" />
+          </Key>
+          <Property Name="id_matricula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_curso" Type="int" Nullable="false" />
+          <Property Name="id_alumno" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profesores">
+          <Key>
+            <PropertyRef Name="id_profesor" />
+          </Key>
+          <Property Name="id_profesor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="primer_apellido" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="segundo_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="nombre_completo" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="direccion" Type="varchar(max)" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="50" />
+          <Property Name="telefono_movil" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NIF_NIE" Type="varchar" MaxLength="20" />
+          <Property Name="Pasaporte" Type="varchar" MaxLength="20" />
+          <Property Name="disponible" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tipos_de_cancelacion">
+          <Key>
+            <PropertyRef Name="id_tipocancelacion" />
+          </Key>
+          <Property Name="id_tipocancelacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clase_impartida" Type="bit" Nullable="false" />
+          <Property Name="implica_pago_profesor" Type="bit" />
+          <Property Name="implica_cobro_cliente" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tipos_de_tarea">
+          <Key>
+            <PropertyRef Name="id_tipotarea" />
+          </Key>
+          <Property Name="id_tipotarea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lectiva" Type="bit" />
+          <Property Name="transporte" Type="bit" />
+          <Property Name="administrativa" Type="bit" />
+        </EntityType>
+        <Association Name="FK__Horarios__id_gru__173876EA">
+          <End Role="Grupos" Type="Self.Grupos" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupos">
+              <PropertyRef Name="id_grupo" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Horarios__id_pro__164452B1">
+          <End Role="Profesores" Type="Self.Profesores" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesores">
+              <PropertyRef Name="id_profesor" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="id_profesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alumnos_en_grupos_Matriculas">
+          <End Role="Matriculas" Type="Self.Matriculas" Multiplicity="1" />
+          <End Role="Alumnos_en_grupos" Type="Self.Alumnos_en_grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matriculas">
+              <PropertyRef Name="id_matricula" />
+            </Principal>
+            <Dependent Role="Alumnos_en_grupos">
+              <PropertyRef Name="id_matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asistencia_Alumnos_en_grupos">
+          <End Role="Alumnos_en_grupos" Type="Self.Alumnos_en_grupos" Multiplicity="0..1" />
+          <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos_en_grupos">
+              <PropertyRef Name="id_alumnoengrupo" />
+            </Principal>
+            <Dependent Role="Asistencia">
+              <PropertyRef Name="id_alumnoengrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asistencia_Clases">
+          <End Role="Clases" Type="Self.Clases" Multiplicity="0..1" />
+          <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clases">
+              <PropertyRef Name="id_clase" />
+            </Principal>
+            <Dependent Role="Asistencia">
+              <PropertyRef Name="id_clase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clases_Horarios">
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="1" />
+          <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Horarios">
+              <PropertyRef Name="id_horario" />
+            </Principal>
+            <Dependent Role="Clases">
+              <PropertyRef Name="id_horario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clases_Profesores">
+          <End Role="Profesores" Type="Self.Profesores" Multiplicity="1" />
+          <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesores">
+              <PropertyRef Name="id_profesor" />
+            </Principal>
+            <Dependent Role="Clases">
+              <PropertyRef Name="id_profesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clases_Tipos_de_cancelacion">
+          <End Role="Tipos_de_cancelacion" Type="Self.Tipos_de_cancelacion" Multiplicity="1" />
+          <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipos_de_cancelacion">
+              <PropertyRef Name="id_tipocancelacion" />
+            </Principal>
+            <Dependent Role="Clases">
+              <PropertyRef Name="id_tipocancelacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clases_Tipos_de_tarea">
+          <End Role="Tipos_de_tarea" Type="Self.Tipos_de_tarea" Multiplicity="1" />
+          <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipos_de_tarea">
+              <PropertyRef Name="id_tipotarea" />
+            </Principal>
+            <Dependent Role="Clases">
+              <PropertyRef Name="id_tipotarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupos_Cursos">
+          <End Role="Cursos" Type="Self.Cursos" Multiplicity="0..1" />
+          <End Role="Grupos" Type="Self.Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cursos">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="Grupos">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupos_Profesores">
+          <End Role="Profesores" Type="Self.Profesores" Multiplicity="0..1" />
+          <End Role="Grupos" Type="Self.Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesores">
+              <PropertyRef Name="id_profesor" />
+            </Principal>
+            <Dependent Role="Grupos">
+              <PropertyRef Name="id_profesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horarios_Profesores">
+          <End Role="Profesores" Type="Self.Profesores" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesores">
+              <PropertyRef Name="id_profesor" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="id_profesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horarios_Tipos_de_tarea">
+          <End Role="Tipos_de_tarea" Type="Self.Tipos_de_tarea" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipos_de_tarea">
+              <PropertyRef Name="id_tipotarea" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="id_tipo_tarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matriculas_Alumnos">
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1" />
+          <End Role="Matriculas" Type="Self.Matriculas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="id_alumno" />
+            </Principal>
+            <Dependent Role="Matriculas">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matriculas_Cursos">
+          <End Role="Cursos" Type="Self.Cursos" Multiplicity="1" />
+          <End Role="Matriculas" Type="Self.Matriculas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cursos">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="Matriculas">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NuevaEscuelaModelStoreContainer">
+          <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alumnos_en_grupos" EntityType="Self.Alumnos_en_grupos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asistencia" EntityType="Self.Asistencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Aulas" EntityType="Self.Aulas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clases" EntityType="Self.Clases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cursos" EntityType="Self.Cursos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grupos" EntityType="Self.Grupos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horarios" EntityType="Self.Horarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matriculas" EntityType="Self.Matriculas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesores" EntityType="Self.Profesores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipos_de_cancelacion" EntityType="Self.Tipos_de_cancelacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipos_de_tarea" EntityType="Self.Tipos_de_tarea" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Horarios__id_gru__173876EA" Association="Self.FK__Horarios__id_gru__173876EA">
+            <End Role="Grupos" EntitySet="Grupos" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Horarios__id_pro__164452B1" Association="Self.FK__Horarios__id_pro__164452B1">
+            <End Role="Profesores" EntitySet="Profesores" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alumnos_en_grupos_Matriculas" Association="Self.FK_Alumnos_en_grupos_Matriculas">
+            <End Role="Matriculas" EntitySet="Matriculas" />
+            <End Role="Alumnos_en_grupos" EntitySet="Alumnos_en_grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asistencia_Alumnos_en_grupos" Association="Self.FK_Asistencia_Alumnos_en_grupos">
+            <End Role="Alumnos_en_grupos" EntitySet="Alumnos_en_grupos" />
+            <End Role="Asistencia" EntitySet="Asistencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asistencia_Clases" Association="Self.FK_Asistencia_Clases">
+            <End Role="Clases" EntitySet="Clases" />
+            <End Role="Asistencia" EntitySet="Asistencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clases_Horarios" Association="Self.FK_Clases_Horarios">
+            <End Role="Horarios" EntitySet="Horarios" />
+            <End Role="Clases" EntitySet="Clases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clases_Profesores" Association="Self.FK_Clases_Profesores">
+            <End Role="Profesores" EntitySet="Profesores" />
+            <End Role="Clases" EntitySet="Clases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clases_Tipos_de_cancelacion" Association="Self.FK_Clases_Tipos_de_cancelacion">
+            <End Role="Tipos_de_cancelacion" EntitySet="Tipos_de_cancelacion" />
+            <End Role="Clases" EntitySet="Clases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clases_Tipos_de_tarea" Association="Self.FK_Clases_Tipos_de_tarea">
+            <End Role="Tipos_de_tarea" EntitySet="Tipos_de_tarea" />
+            <End Role="Clases" EntitySet="Clases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupos_Cursos" Association="Self.FK_Grupos_Cursos">
+            <End Role="Cursos" EntitySet="Cursos" />
+            <End Role="Grupos" EntitySet="Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupos_Profesores" Association="Self.FK_Grupos_Profesores">
+            <End Role="Profesores" EntitySet="Profesores" />
+            <End Role="Grupos" EntitySet="Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horarios_Profesores" Association="Self.FK_Horarios_Profesores">
+            <End Role="Profesores" EntitySet="Profesores" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horarios_Tipos_de_tarea" Association="Self.FK_Horarios_Tipos_de_tarea">
+            <End Role="Tipos_de_tarea" EntitySet="Tipos_de_tarea" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matriculas_Alumnos" Association="Self.FK_Matriculas_Alumnos">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="Matriculas" EntitySet="Matriculas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matriculas_Cursos" Association="Self.FK_Matriculas_Cursos">
+            <End Role="Cursos" EntitySet="Cursos" />
+            <End Role="Matriculas" EntitySet="Matriculas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NuevaEscuelaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alumnos">
+          <Key>
+            <PropertyRef Name="id_alumno" />
+          </Key>
+          <Property Name="id_alumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="primer_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="segundo_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_completo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profesion" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono_movil" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Matriculas" Relationship="Self.FK_Matriculas_Alumnos" FromRole="Alumnos" ToRole="Matriculas" />
+        </EntityType>
+        <EntityType Name="Alumnos_en_grupos">
+          <Key>
+            <PropertyRef Name="id_alumnoengrupo" />
+          </Key>
+          <Property Name="id_alumnoengrupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_matricula" Type="Int32" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Matriculas" Relationship="Self.FK_Alumnos_en_grupos_Matriculas" FromRole="Alumnos_en_grupos" ToRole="Matriculas" />
+          <NavigationProperty Name="Asistencia" Relationship="Self.FK_Asistencia_Alumnos_en_grupos" FromRole="Alumnos_en_grupos" ToRole="Asistencia" />
+        </EntityType>
+        <EntityType Name="Asistencia">
+          <Key>
+            <PropertyRef Name="id_asistencia" />
+          </Key>
+          <Property Name="id_asistencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_clase" Type="Int32" />
+          <Property Name="id_alumnoengrupo" Type="Int32" />
+          <Property Name="asiste" Type="Boolean" />
+          <Property Name="falta_justificada" Type="Boolean" />
+          <NavigationProperty Name="Alumnos_en_grupos" Relationship="Self.FK_Asistencia_Alumnos_en_grupos" FromRole="Asistencia" ToRole="Alumnos_en_grupos" />
+          <NavigationProperty Name="Clases" Relationship="Self.FK_Asistencia_Clases" FromRole="Asistencia" ToRole="Clases" />
+        </EntityType>
+        <EntityType Name="Clases">
+          <Key>
+            <PropertyRef Name="id_clase" />
+          </Key>
+          <Property Name="id_clase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_tipocancelacion" Type="Int32" Nullable="false" />
+          <Property Name="id_horario" Type="Int32" Nullable="false" />
+          <Property Name="id_tipotarea" Type="Int32" Nullable="false" />
+          <Property Name="id_profesor" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hora_inicio" Type="Time" Precision="7" />
+          <Property Name="hora_fin" Type="Time" Precision="7" />
+          <Property Name="notas_pedagogicas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Asistencia" Relationship="Self.FK_Asistencia_Clases" FromRole="Clases" ToRole="Asistencia" />
+          <NavigationProperty Name="Horarios" Relationship="Self.FK_Clases_Horarios" FromRole="Clases" ToRole="Horarios" />
+          <NavigationProperty Name="Profesores" Relationship="Self.FK_Clases_Profesores" FromRole="Clases" ToRole="Profesores" />
+          <NavigationProperty Name="Tipos_de_cancelacion" Relationship="Self.FK_Clases_Tipos_de_cancelacion" FromRole="Clases" ToRole="Tipos_de_cancelacion" />
+          <NavigationProperty Name="Tipos_de_tarea" Relationship="Self.FK_Clases_Tipos_de_tarea" FromRole="Clases" ToRole="Tipos_de_tarea" />
+        </EntityType>
+        <EntityType Name="Cursos">
+          <Key>
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_curso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Grupos" Relationship="Self.FK_Grupos_Cursos" FromRole="Cursos" ToRole="Grupos" />
+          <NavigationProperty Name="Matriculas" Relationship="Self.FK_Matriculas_Cursos" FromRole="Cursos" ToRole="Matriculas" />
+        </EntityType>
+        <EntityType Name="Grupos">
+          <Key>
+            <PropertyRef Name="id_grupo" />
+          </Key>
+          <Property Name="id_grupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_profesor" Type="Int32" />
+          <Property Name="id_curso" Type="Int32" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="0" />
+          <Property Name="lugar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="notas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="horario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="maximo_alumnos" Type="Int32" />
+          <Property Name="numero_alumnos" Type="Int32" />
+          <NavigationProperty Name="Cursos" Relationship="Self.FK_Grupos_Cursos" FromRole="Grupos" ToRole="Cursos" />
+          <NavigationProperty Name="Horarios" Relationship="Self.FK__Horarios__id_gru__173876EA" FromRole="Grupos" ToRole="Horarios" />
+          <NavigationProperty Name="Profesores" Relationship="Self.FK_Grupos_Profesores" FromRole="Grupos" ToRole="Profesores" />
+          <Property Name="id_aula" Type="Int32" />
+          <NavigationProperty Name="Aulas" Relationship="NuevaEscuelaModel.GruposAulas" FromRole="Grupos" ToRole="Aulas" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="id_horario" />
+          </Key>
+          <Property Name="id_horario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_profesor" Type="Int32" Nullable="false" />
+          <Property Name="id_grupo" Type="Int32" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="0" />
+          <Property Name="L" Type="Boolean" />
+          <Property Name="M" Type="Boolean" />
+          <Property Name="X" Type="Boolean" />
+          <Property Name="J" Type="Boolean" />
+          <Property Name="V" Type="Boolean" />
+          <Property Name="hora_inicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="hora_fin" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="id_tipo_tarea" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clases" Relationship="Self.FK_Clases_Horarios" FromRole="Horarios" ToRole="Clases" />
+          <NavigationProperty Name="Grupos" Relationship="Self.FK__Horarios__id_gru__173876EA" FromRole="Horarios" ToRole="Grupos" />
+          <NavigationProperty Name="Profesores" Relationship="Self.FK__Horarios__id_pro__164452B1" FromRole="Horarios" ToRole="Profesores" />
+          <NavigationProperty Name="Profesores1" Relationship="Self.FK_Horarios_Profesores" FromRole="Horarios" ToRole="Profesores" />
+          <NavigationProperty Name="Tipos_de_tarea" Relationship="Self.FK_Horarios_Tipos_de_tarea" FromRole="Horarios" ToRole="Tipos_de_tarea" />
+        </EntityType>
+        <EntityType Name="Matriculas">
+          <Key>
+            <PropertyRef Name="id_matricula" />
+          </Key>
+          <Property Name="id_matricula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_curso" Type="Int32" Nullable="false" />
+          <Property Name="id_alumno" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Alumnos" Relationship="Self.FK_Matriculas_Alumnos" FromRole="Matriculas" ToRole="Alumnos" />
+          <NavigationProperty Name="Alumnos_en_grupos" Relationship="Self.FK_Alumnos_en_grupos_Matriculas" FromRole="Matriculas" ToRole="Alumnos_en_grupos" />
+          <NavigationProperty Name="Cursos" Relationship="Self.FK_Matriculas_Cursos" FromRole="Matriculas" ToRole="Cursos" />
+        </EntityType>
+        <EntityType Name="Profesores">
+          <Key>
+            <PropertyRef Name="id_profesor" />
+          </Key>
+          <Property Name="id_profesor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="primer_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="segundo_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_completo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono_movil" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NIF_NIE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Pasaporte" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="disponible" Type="Boolean" />
+          <NavigationProperty Name="Clases" Relationship="Self.FK_Clases_Profesores" FromRole="Profesores" ToRole="Clases" />
+          <NavigationProperty Name="Grupos" Relationship="Self.FK_Grupos_Profesores" FromRole="Profesores" ToRole="Grupos" />
+          <NavigationProperty Name="Horarios" Relationship="Self.FK__Horarios__id_pro__164452B1" FromRole="Profesores" ToRole="Horarios" />
+          <NavigationProperty Name="Horarios1" Relationship="Self.FK_Horarios_Profesores" FromRole="Profesores" ToRole="Horarios" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tipos_de_cancelacion">
+          <Key>
+            <PropertyRef Name="id_tipocancelacion" />
+          </Key>
+          <Property Name="id_tipocancelacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="clase_impartida" Type="Boolean" Nullable="false" />
+          <Property Name="implica_pago_profesor" Type="Boolean" />
+          <Property Name="implica_cobro_cliente" Type="Boolean" />
+          <NavigationProperty Name="Clases" Relationship="Self.FK_Clases_Tipos_de_cancelacion" FromRole="Tipos_de_cancelacion" ToRole="Clases" />
+        </EntityType>
+        <EntityType Name="Tipos_de_tarea">
+          <Key>
+            <PropertyRef Name="id_tipotarea" />
+          </Key>
+          <Property Name="id_tipotarea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lectiva" Type="Boolean" />
+          <Property Name="transporte" Type="Boolean" />
+          <Property Name="administrativa" Type="Boolean" />
+          <NavigationProperty Name="Clases" Relationship="Self.FK_Clases_Tipos_de_tarea" FromRole="Tipos_de_tarea" ToRole="Clases" />
+          <NavigationProperty Name="Horarios" Relationship="Self.FK_Horarios_Tipos_de_tarea" FromRole="Tipos_de_tarea" ToRole="Horarios" />
+        </EntityType>
+        <Association Name="FK_Matriculas_Alumnos">
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1" />
+          <End Role="Matriculas" Type="Self.Matriculas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="id_alumno" />
+            </Principal>
+            <Dependent Role="Matriculas">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alumnos_en_grupos_Matriculas">
+          <End Role="Matriculas" Type="Self.Matriculas" Multiplicity="1" />
+          <End Role="Alumnos_en_grupos" Type="Self.Alumnos_en_grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matriculas">
+              <PropertyRef Name="id_matricula" />
+            </Principal>
+            <Dependent Role="Alumnos_en_grupos">
+              <PropertyRef Name="id_matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asistencia_Alumnos_en_grupos">
+          <End Role="Alumnos_en_grupos" Type="Self.Alumnos_en_grupos" Multiplicity="0..1" />
+          <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos_en_grupos">
+              <PropertyRef Name="id_alumnoengrupo" />
+            </Principal>
+            <Dependent Role="Asistencia">
+              <PropertyRef Name="id_alumnoengrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asistencia_Clases">
+          <End Role="Clases" Type="Self.Clases" Multiplicity="0..1" />
+          <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clases">
+              <PropertyRef Name="id_clase" />
+            </Principal>
+            <Dependent Role="Asistencia">
+              <PropertyRef Name="id_clase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clases_Horarios">
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="1" />
+          <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Horarios">
+              <PropertyRef Name="id_horario" />
+            </Principal>
+            <Dependent Role="Clases">
+              <PropertyRef Name="id_horario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clases_Profesores">
+          <End Role="Profesores" Type="Self.Profesores" Multiplicity="1" />
+          <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesores">
+              <PropertyRef Name="id_profesor" />
+            </Principal>
+            <Dependent Role="Clases">
+              <PropertyRef Name="id_profesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clases_Tipos_de_cancelacion">
+          <End Role="Tipos_de_cancelacion" Type="Self.Tipos_de_cancelacion" Multiplicity="1" />
+          <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipos_de_cancelacion">
+              <PropertyRef Name="id_tipocancelacion" />
+            </Principal>
+            <Dependent Role="Clases">
+              <PropertyRef Name="id_tipocancelacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clases_Tipos_de_tarea">
+          <End Role="Tipos_de_tarea" Type="Self.Tipos_de_tarea" Multiplicity="1" />
+          <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipos_de_tarea">
+              <PropertyRef Name="id_tipotarea" />
+            </Principal>
+            <Dependent Role="Clases">
+              <PropertyRef Name="id_tipotarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupos_Cursos">
+          <End Role="Cursos" Type="Self.Cursos" Multiplicity="0..1" />
+          <End Role="Grupos" Type="Self.Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cursos">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="Grupos">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matriculas_Cursos">
+          <End Role="Cursos" Type="Self.Cursos" Multiplicity="1" />
+          <End Role="Matriculas" Type="Self.Matriculas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cursos">
+              <PropertyRef Name="id_curso" />
+            </Principal>
+            <Dependent Role="Matriculas">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Horarios__id_gru__173876EA">
+          <End Role="Grupos" Type="Self.Grupos" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupos">
+              <PropertyRef Name="id_grupo" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupos_Profesores">
+          <End Role="Profesores" Type="Self.Profesores" Multiplicity="0..1" />
+          <End Role="Grupos" Type="Self.Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesores">
+              <PropertyRef Name="id_profesor" />
+            </Principal>
+            <Dependent Role="Grupos">
+              <PropertyRef Name="id_profesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Horarios__id_pro__164452B1">
+          <End Role="Profesores" Type="Self.Profesores" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesores">
+              <PropertyRef Name="id_profesor" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="id_profesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horarios_Profesores">
+          <End Role="Profesores" Type="Self.Profesores" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesores">
+              <PropertyRef Name="id_profesor" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="id_profesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horarios_Tipos_de_tarea">
+          <End Role="Tipos_de_tarea" Type="Self.Tipos_de_tarea" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipos_de_tarea">
+              <PropertyRef Name="id_tipotarea" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="id_tipo_tarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NuevaEscuelaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumnos" EntityType="Self.Alumnos" />
+          <EntitySet Name="Alumnos_en_grupos" EntityType="Self.Alumnos_en_grupos" />
+          <EntitySet Name="Asistencia" EntityType="Self.Asistencia" />
+          <EntitySet Name="Clases" EntityType="Self.Clases" />
+          <EntitySet Name="Cursos" EntityType="Self.Cursos" />
+          <EntitySet Name="Grupos" EntityType="Self.Grupos" />
+          <EntitySet Name="Horarios" EntityType="Self.Horarios" />
+          <EntitySet Name="Matriculas" EntityType="Self.Matriculas" />
+          <EntitySet Name="Profesores" EntityType="Self.Profesores" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tipos_de_cancelacion" EntityType="Self.Tipos_de_cancelacion" />
+          <EntitySet Name="Tipos_de_tarea" EntityType="Self.Tipos_de_tarea" />
+          <AssociationSet Name="FK_Matriculas_Alumnos" Association="Self.FK_Matriculas_Alumnos">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="Matriculas" EntitySet="Matriculas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alumnos_en_grupos_Matriculas" Association="Self.FK_Alumnos_en_grupos_Matriculas">
+            <End Role="Matriculas" EntitySet="Matriculas" />
+            <End Role="Alumnos_en_grupos" EntitySet="Alumnos_en_grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asistencia_Alumnos_en_grupos" Association="Self.FK_Asistencia_Alumnos_en_grupos">
+            <End Role="Alumnos_en_grupos" EntitySet="Alumnos_en_grupos" />
+            <End Role="Asistencia" EntitySet="Asistencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asistencia_Clases" Association="Self.FK_Asistencia_Clases">
+            <End Role="Clases" EntitySet="Clases" />
+            <End Role="Asistencia" EntitySet="Asistencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clases_Horarios" Association="Self.FK_Clases_Horarios">
+            <End Role="Horarios" EntitySet="Horarios" />
+            <End Role="Clases" EntitySet="Clases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clases_Profesores" Association="Self.FK_Clases_Profesores">
+            <End Role="Profesores" EntitySet="Profesores" />
+            <End Role="Clases" EntitySet="Clases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clases_Tipos_de_cancelacion" Association="Self.FK_Clases_Tipos_de_cancelacion">
+            <End Role="Tipos_de_cancelacion" EntitySet="Tipos_de_cancelacion" />
+            <End Role="Clases" EntitySet="Clases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clases_Tipos_de_tarea" Association="Self.FK_Clases_Tipos_de_tarea">
+            <End Role="Tipos_de_tarea" EntitySet="Tipos_de_tarea" />
+            <End Role="Clases" EntitySet="Clases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupos_Cursos" Association="Self.FK_Grupos_Cursos">
+            <End Role="Cursos" EntitySet="Cursos" />
+            <End Role="Grupos" EntitySet="Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matriculas_Cursos" Association="Self.FK_Matriculas_Cursos">
+            <End Role="Cursos" EntitySet="Cursos" />
+            <End Role="Matriculas" EntitySet="Matriculas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Horarios__id_gru__173876EA" Association="Self.FK__Horarios__id_gru__173876EA">
+            <End Role="Grupos" EntitySet="Grupos" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupos_Profesores" Association="Self.FK_Grupos_Profesores">
+            <End Role="Profesores" EntitySet="Profesores" />
+            <End Role="Grupos" EntitySet="Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Horarios__id_pro__164452B1" Association="Self.FK__Horarios__id_pro__164452B1">
+            <End Role="Profesores" EntitySet="Profesores" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horarios_Profesores" Association="Self.FK_Horarios_Profesores">
+            <End Role="Profesores" EntitySet="Profesores" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horarios_Tipos_de_tarea" Association="Self.FK_Horarios_Tipos_de_tarea">
+            <End Role="Tipos_de_tarea" EntitySet="Tipos_de_tarea" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <EntitySet Name="Aulas" EntityType="NuevaEscuelaModel.Aulas" />
+          <AssociationSet Name="GruposAulas" Association="NuevaEscuelaModel.GruposAulas">
+            <End Role="Grupos" EntitySet="Grupos" />
+            <End Role="Aulas" EntitySet="Aulas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Aulas">
+          <Key>
+            <PropertyRef Name="id_aula" />
+          </Key>
+          <Property Name="id_aula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Aula" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Division" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Grupos" Relationship="NuevaEscuelaModel.GruposAulas" FromRole="Aulas" ToRole="Grupos" />
+        </EntityType>
+        <Association Name="GruposAulas">
+          <End Type="NuevaEscuelaModel.Grupos" Role="Grupos" Multiplicity="1" />
+          <End Type="NuevaEscuelaModel.Aulas" Role="Aulas" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NuevaEscuelaModelStoreContainer" CdmEntityContainer="NuevaEscuelaEntities">
+          <EntitySetMapping Name="Alumnos">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Alumnos">
+              <MappingFragment StoreEntitySet="Alumnos">
+                <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
+                <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+                <ScalarProperty Name="profesion" ColumnName="profesion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="telefono_movil" ColumnName="telefono_movil" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alumnos_en_grupos">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Alumnos_en_grupos">
+              <MappingFragment StoreEntitySet="Alumnos_en_grupos">
+                <ScalarProperty Name="id_alumnoengrupo" ColumnName="id_alumnoengrupo" />
+                <ScalarProperty Name="id_matricula" ColumnName="id_matricula" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asistencia">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Asistencia">
+              <MappingFragment StoreEntitySet="Asistencia">
+                <ScalarProperty Name="id_asistencia" ColumnName="id_asistencia" />
+                <ScalarProperty Name="id_clase" ColumnName="id_clase" />
+                <ScalarProperty Name="id_alumnoengrupo" ColumnName="id_alumnoengrupo" />
+                <ScalarProperty Name="asiste" ColumnName="asiste" />
+                <ScalarProperty Name="falta_justificada" ColumnName="falta_justificada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clases">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Clases">
+              <MappingFragment StoreEntitySet="Clases">
+                <ScalarProperty Name="id_clase" ColumnName="id_clase" />
+                <ScalarProperty Name="id_tipocancelacion" ColumnName="id_tipocancelacion" />
+                <ScalarProperty Name="id_horario" ColumnName="id_horario" />
+                <ScalarProperty Name="id_tipotarea" ColumnName="id_tipotarea" />
+                <ScalarProperty Name="id_profesor" ColumnName="id_profesor" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="hora_inicio" ColumnName="hora_inicio" />
+                <ScalarProperty Name="hora_fin" ColumnName="hora_fin" />
+                <ScalarProperty Name="notas_pedagogicas" ColumnName="notas_pedagogicas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cursos">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Cursos">
+              <MappingFragment StoreEntitySet="Cursos">
+                <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grupos">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Grupos">
+              <MappingFragment StoreEntitySet="Grupos">
+                <ScalarProperty Name="id_aula" ColumnName="id_aula" />
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+                <ScalarProperty Name="id_profesor" ColumnName="id_profesor" />
+                <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="notas" ColumnName="notas" />
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="maximo_alumnos" ColumnName="maximo_alumnos" />
+                <ScalarProperty Name="numero_alumnos" ColumnName="numero_alumnos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horarios">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Horarios">
+              <MappingFragment StoreEntitySet="Horarios">
+                <ScalarProperty Name="id_horario" ColumnName="id_horario" />
+                <ScalarProperty Name="id_profesor" ColumnName="id_profesor" />
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="L" ColumnName="L" />
+                <ScalarProperty Name="M" ColumnName="M" />
+                <ScalarProperty Name="X" ColumnName="X" />
+                <ScalarProperty Name="J" ColumnName="J" />
+                <ScalarProperty Name="V" ColumnName="V" />
+                <ScalarProperty Name="hora_inicio" ColumnName="hora_inicio" />
+                <ScalarProperty Name="hora_fin" ColumnName="hora_fin" />
+                <ScalarProperty Name="id_tipo_tarea" ColumnName="id_tipo_tarea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matriculas">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Matriculas">
+              <MappingFragment StoreEntitySet="Matriculas">
+                <ScalarProperty Name="id_matricula" ColumnName="id_matricula" />
+                <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+                <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profesores">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Profesores">
+              <MappingFragment StoreEntitySet="Profesores">
+                <ScalarProperty Name="id_profesor" ColumnName="id_profesor" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
+                <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="telefono_movil" ColumnName="telefono_movil" />
+                <ScalarProperty Name="NIF_NIE" ColumnName="NIF_NIE" />
+                <ScalarProperty Name="Pasaporte" ColumnName="Pasaporte" />
+                <ScalarProperty Name="disponible" ColumnName="disponible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipos_de_cancelacion">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Tipos_de_cancelacion">
+              <MappingFragment StoreEntitySet="Tipos_de_cancelacion">
+                <ScalarProperty Name="id_tipocancelacion" ColumnName="id_tipocancelacion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="clase_impartida" ColumnName="clase_impartida" />
+                <ScalarProperty Name="implica_pago_profesor" ColumnName="implica_pago_profesor" />
+                <ScalarProperty Name="implica_cobro_cliente" ColumnName="implica_cobro_cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipos_de_tarea">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Tipos_de_tarea">
+              <MappingFragment StoreEntitySet="Tipos_de_tarea">
+                <ScalarProperty Name="id_tipotarea" ColumnName="id_tipotarea" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="lectiva" ColumnName="lectiva" />
+                <ScalarProperty Name="transporte" ColumnName="transporte" />
+                <ScalarProperty Name="administrativa" ColumnName="administrativa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aulas">
+            <EntityTypeMapping TypeName="NuevaEscuelaModel.Aulas">
+              <MappingFragment StoreEntitySet="Aulas">
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Aula" ColumnName="Aula" />
+                <ScalarProperty Name="id_aula" ColumnName="id_aula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
